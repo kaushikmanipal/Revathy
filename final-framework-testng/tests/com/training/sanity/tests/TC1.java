@@ -55,6 +55,7 @@ public class TC1 {
 		Assert.assertEquals("http://realestatem1.upskills.in/", baseUrl);
 	}
 		@Test
+		/*first TC*/
 		public void A_validLoginTest() throws InterruptedException {
 		/*	loginPOM.clickLoginLink();
 			loginPOM.sendUserName("admin");
