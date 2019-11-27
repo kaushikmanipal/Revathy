@@ -5,6 +5,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 
 /**
  * 
@@ -14,11 +16,11 @@ import org.openqa.selenium.WebElement;
  * @since 17-Dec-2018 
  */
 public class GenericMethods {
-	WebDriver driver ; 
+	public WebDriver driver ; 
 	
 	public GenericMethods(WebDriver driver){
-		this.driver = driver;
-	}
+		this.driver = driver; 
+	} 
 	
 	/**
 	 * 
@@ -81,4 +83,79 @@ public class GenericMethods {
 	public boolean checkSingleEntry(String locator, String type){
 		return getElementsAsList(locator, type).size() ==1;
 	}
+	
+	
+	public void assertText(String expectedText, String locator, String type, String msg) {
+		type = type.toLowerCase();
+		
+		if(type.equals("id")){
+			String actualText = driver.findElement(By.id(locator)).getText();
+			Assert.assertTrue(actualText.equals(expectedText),msg );
+		}else if(type.equals("class")){
+			String actualText = driver.findElement(By.className(locator)).getText();
+			Assert.assertTrue(actualText.equals(expectedText),msg );
+		}else if(type.equals("name")){
+			String actualText = driver.findElement(By.name(locator)).getText();
+		Assert.assertTrue(actualText.equals(expectedText),msg );
+		}else if(type.equals("xpath")){
+			String actualText = driver.findElement(By.xpath(locator)).getText();
+			System.out.println(actualText);
+			 Assert.assertTrue(actualText.equals(expectedText),msg );
+			System.out.println(msg);
+		}else if(type.equals("css")){
+			String actualText = driver.findElement(By.cssSelector(locator)).getText();
+			Assert.assertTrue(actualText.equals(expectedText),msg );
+		}else if(type.equals("tagname")){
+			String actualText = driver.findElement(By.tagName(locator)).getText();
+			Assert.assertTrue(actualText.equals(expectedText),msg );
+		}else if(type.equals("linktext")){
+			String actualText = driver.findElement(By.linkText(locator)).getText();
+			Assert.assertTrue(actualText.equals(expectedText),msg );
+		}else if(type.equals("partiallinktext")){
+			String actualText = driver.findElement(By.partialLinkText(locator)).getText();
+			Assert.assertTrue(actualText.equals(expectedText),msg );}
+		else {
+			
+			System.out.println("AssetText Failed");
+			
+		}
+			
+			
+			
+				
+				
+				
+						
+				
+				
+			
+		}
+		
+	
+	
+	public void mouseHover(WebElement Locator1,WebElement Locator2, WebDriver driver ) {
+	
+	Actions action = new Actions(driver);
+	
+	
+	action.moveToElement(Locator1).perform();
+	action.moveToElement(Locator2).click().perform(); 
+	
+	
+	}
+	
+	public void sendValue(WebElement locator, String value) {
+		
+		locator.sendKeys(value);
+		
+		
+		
+	}
+	
+	
+	
 }
+
+	
+	
+	
